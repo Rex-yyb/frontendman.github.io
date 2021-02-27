@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <style>
+    .box-wrapper {
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .box {
+      position: absolute;
+      top: 1;
+      width: 100px;
+      height: 100px;
+      left: 0;
+      display: block;
+      /* background-color: black; */
+      color: black;
+      text-align: center;
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+  <input value="setTimeout 0ms" onclick="setTimeout0ms()" type="button" />
+  <input value="setTimeout 60fps" onclick="setTimeout60fps()" type="button" />
+  <input value="requestAnimationFrame" onclick="startAnimation()" type="button" />
+  <input value="startAll" onclick="startAll()" type="button" />
+  <div class="box-wrapper">
+    <div class="box sot0">setTimeout 0 ms</div>
+    <div class="box sot1" style="top: 150px">setTimeout 60fps</div>
+    <div class="box sot2" style="top: 300px">requestAnimationFrame</div>
+  </div>
+
+  <script>
+
+
+    var animationId = 0
+
+    var startAll = function () {
+      setTimeout0ms()
+      setTimeout60fps()
+      startAnimation()
+    }
+
+
+    var setTimeout0ms = function () {
+      var sot = document.querySelector('.sot0')
+      var left = 0
+      function update() {
+        left = left + 1
+        sot.style.left = left + 'px'
+        // console.log('settimeout')
+        setTimeout(update, 0);
+      }
+
+      setTimeout(update, 0);
+
+      // function update2() {
+      //   console.log('animaietion')
+      //   requestAnimationFrame(update2);
+      // }
+
+      // requestAnimationFrame(update2);
+    }
+
+    var setTimeout60fps = function () {
+      var sot = document.querySelector('.sot1')
+      var left = 0
+      function update() {
+        for (var i = 0; i < 10000000; i++) {
+          animationId = i;
+        }
+        left = left + 1
+        sot.style.left = left + 'px'
+        animationId = setTimeout(update, 1000 / 60);
+      }
+
+      setTimeout(update, 1000 / 60);
+    }
+
+
+    var startAnimation = function () {
+      var sot = document.querySelector('.sot2')
+      var left = 0
+
+      function update() {
+        for (var i = 0; i < 10000000; i++) {
+          animationId = i;
+        }
+        left = left + 1
+        sot.style.left = left + 'px'
+        // console.log(left,'requestAnimationFrame')
+        animationId = requestAnimationFrame(update);
+      }
+
+      requestAnimationFrame(update);
+    }
+
+
+
+  </script>
+</body>
+
+</html>
