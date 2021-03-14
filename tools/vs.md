@@ -21,7 +21,7 @@
       }
 
 - Auto Rename Tag
-  用于自动重命名配对的标签名称，在日常开发中，对于需要闭合的标签。需要手动修改起始标签和结束标签，使用该插件，可以快速进行快速修改。
+  用于自动重命名配对的标签名称，在日常开发中，对于需要闭合的标签,需要手动修改起始标签和结束标签.使用该插件，可以进行快速修改。
   ![](./images/vs/auto-rename-tag.gif)
 
 - Auto Import
@@ -31,8 +31,9 @@
 - GitLens
   如果你在 VS Code 中使用 Git 进行代码版本控制，那么 GitLens 插件一定是必备的插件。
   GitLens 可以帮助我们查看当前代码日志、历史。
+  查看git历史记录
   ![](./images/vs/git-history.jpg)
-
+  查看单个文件中内容的作者
   ![](./images/vs/git-author.png)
 
 - Git History
