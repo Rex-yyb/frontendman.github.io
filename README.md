@@ -1,16 +1,11 @@
-# 前端技术分享
-* docsify serve . --open
+# 前端技术学习分享
+> 整理Web前端技术栈、学习路线，根据路线进行学习并总结分享。
 
-```html
-<p>This is a paragraph</p>
-<a href="//docsify.js.org/">Docsify</a>
-```
-```javascript
-let s= 100;
-console.log(s);
-```
-```css
-.cs{
-    margin-left:20px;
-}
-```
+* 参与人员
+  * Rex
+  * Manolo
+  * Martin
+  * Jayden
+* 成立时间`2021-2`
+
+
