@@ -4,7 +4,7 @@
 
 在利用 git 实现多人合作程序开发的过程中，我们有时会出现错误提交的情况，此时我们希望能撤销提交操作，让程序回到提交前的样子，这个时候，我们可以使用：reset、revert。
 
-### Git 的基本流程
+## Git 的基本流程
 
 ![](../images/git/reset2.png)
 
@@ -14,14 +14,14 @@
 
 `Repository` 提交的历史，即使用 git commit 提交后的结果
 
-### reset
+## reset
 
-#### 背景知识
+### 背景知识
 
 git reset 的 3 种工作模式
 ![](../images/git/reset.png)
 
-#### 解决方案
+### 解决方案
 
 - `要放弃目前本地的所有改变時`
 
@@ -45,9 +45,9 @@ git reset 如果不加参数，那么默认使用 --mixed 参数。
 
 简而言之，就是「把所有差异都混合（mixed）放在工作目录中」。
 
-### revert
+## revert
 
-#### 需要撤销某次操作
+### 需要撤销某次操作
 
 使用 git revert `commitId`
 
