@@ -12,4 +12,5 @@
       * [Git进阶之工程化 ]()
   * [PC软件](/tools/pc.md)
   * [VS Code](/tools/vs.md)
+  * [chrome 插件](/tools/chrome.md)
 * [生产力工具-2](/tools/xcz/生产力工具-2/index.md)
