@@ -29,7 +29,7 @@ Android虚拟机通常只能支持谷歌官方特定系统的模拟。而通过�
 
 #### 模拟调试面板
 
-通过在网页中引入一段JS代码，来注入一个模拟调试面板，用于查看DOM/CSS、日志、网络请求、本地存储，支持执行JS代码。但是不支持动态修改DOM/CSS，在面板上进行JS代码录入体验也不好，整体功能较弱。
+通过在网页中引入一段JS代码，来注入一个模拟调试面板，用于查看DOM/CSS、日志、网络请求、本地存储，支持执行JS代码。但是不支持动态修改DOM/CSS，在面板上进行JS代码录入体验较差，整体功能较弱。
 
 * [`vConsole`](https://github.com/Tencent/vConsole)
 * [`Edura`](https://github.com/liriliri/eruda)

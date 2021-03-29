@@ -154,6 +154,16 @@
 * 参考资料
   * [tar指令详解](https://blog.csdn.net/freeking101/article/details/51480295)
 
+
+## curl
+
+http命令行工具
+
+| 指令                        | 说明               |
+| --------------------------- | ------------------ |
+| `curl http://www.baidu.com` | 下载并显示网页html |
+| `curl http://www.baidu.com >> index.html` | 下载并网页到index.html |
+
 ## 网络
 
 | 指令         | 说明           |
@@ -187,3 +197,7 @@
 * Step3：按`:`进入命令模式
 * Step4.1：按`q!`不保存并退出
 * Step4.2：按`wq`保存并退出
+  
+## 其它
+
+* 命令行后加`&`：表示此进程为后台进程，这样就不会占用当前Shell
