@@ -13,6 +13,8 @@
   * [PC软件](/tools/pc.md)
   * [VS Code](/tools/vs.md)
   * [chrome 插件](/tools/chrome.md)
+  * [优秀站点](/tools/site.md)
+  * [画图工具](/tools/draw_tools.md)
   * Debug工具 
     * [概述](/tools/debug/debug.md)
     * [远程调试工具](/tools/xcz/调试/index.md)
