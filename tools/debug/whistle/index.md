@@ -162,81 +162,85 @@ whistle 集成了 fiddler、weinre 大部分功能于一体，使用起来更加
 - 绑定转发
 
 ```
+## disable,对某些域名不拦截
+## 一般放到 Default 分组
+/wx.qq.com/ disable://intercept
+## filter,在Network不会出现某些域名的请求
+/qq.com/ filter://hide
 
+## socks
+## 一般放到 Default 分组
+/facebook/ socks://127.0.0.1:1080
+/vk.com/ socks://127.0.0.1:1080
+/google/ socks://127.0.0.1:1080
 
-      ## disable,对某些域名不拦截
-      ## 一般放到 Default 分组
-      /wx.qq.com/ disable://intercept
-      ## filter,在Network不会出现某些域名的请求
-      /qq.com/ filter://hide
+## 一般场景是调试内嵌APP页面，APP内有一个入口链接a，而调试的目标页面是b
+## 通过以下一行配置，页面a会自动换成页面b
+www.test.com/a.html www.test.com/b.html
 
-      ## socks
-      ## 一般放到 Default 分组
-      /facebook/ socks://127.0.0.1:1080
-      /vk.com/ socks://127.0.0.1:1080
-      /google/ socks://127.0.0.1:1080
-
-      ## 一般场景是调试内嵌APP页面，APP内有一个入口链接a，而调试的目标页面是b
-      ## 通过以下一行配置，页面a会自动换成页面b
-      www.test.com/a.html www.test.com/b.html
-
-      ## 绑定
-      ## a.b.c.d 是某个环境的ip地址
-      ## 有时通过多个域名的方式来部署多套开发环境
-      ## 通过以下两行配置可以屏蔽开发环境域名与线上不一致的情况
-      www.test.com mwww.test.com
-      mwww.test.com a.b.c.d
+## 绑定
+## a.b.c.d 是某个环境的ip地址
+## 有时通过多个域名的方式来部署多套开发环境
+## 通过以下两行配置可以屏蔽开发环境域名与线上不一致的情况
+www.test.com mwww.test.com
+mwww.test.com a.b.c.d
 
 ```
 
 - req
 
-      ## ua
-      www.test.com ua://{wp_ua}
-      #www.test.com ua://{ali_ua}
+```
+## ua
+www.test.com ua://{wp_ua}
+#www.test.com ua://{ali_ua}
 
-      ## referrer
-      www.test.com referer://https://vk.com/
-      ## referrer null
-      #www.test.com referer://
+## referrer
+www.test.com referer://https://vk.com/
+## referrer null
+#www.test.com referer://
 
-      ## reqHeaders，修改请求头
-      ## ua、referer协议都可以通过reqHeaders来完成
-      www.test.com reqHeaders://{req-headers}
+## reqHeaders，修改请求头
+## ua、referer协议都可以通过reqHeaders来完成
+www.test.com reqHeaders://{req-headers}
+```
 
 - res
 
-      ## file，本地调试是其典型的使用场景
-      www.test.com/sw.js file:///path/to/your/local/sw.js
-      ## xfile
-      #www.test.com/sw.js xfile:///path/to/your/local/sw.js
+```
+## file，本地调试是其典型的使用场景
+www.test.com/sw.js file:///path/to/your/local/sw.js
+## xfile
+#www.test.com/sw.js xfile:///path/to/your/local/sw.js
 
-      ## tpl，常用于mock jsonp请求
-      aliexpress.com/query.jsonp tpl://{res-jsonp}
-      ## xtpl，同tpl，本地不存在时走线上
-      aliexpress.com/query.jsonp xtpl://{res-jsonp}
+## tpl，常用于mock jsonp请求
+aliexpress.com/query.jsonp tpl://{res-jsonp}
+## xtpl，同tpl，本地不存在时走线上
+aliexpress.com/query.jsonp xtpl://{res-jsonp}
 
-      ## resHeaders，修改响应头
-      ae01.alicdn.com resHeaders://{res-cors}
+## resHeaders，修改响应头
+ae01.alicdn.com resHeaders://{res-cors}
 
-      ## html，往html文档(</body>之前)追加html标签(script,style or normal html tag)
-      www.test.com html://{html-test}
+## html，往html文档(</body>之前)追加html标签(script,style or normal html tag)
+www.test.com html://{html-test}
 
-      ## js，往js响应追加脚本，如果响应是html文档，则自动用`<script></script>`包装后插入
-      www.test.com/sw.js js://{js-test}
+## js，往js响应追加脚本，如果响应是html文档，则自动用`<script></script>`包装后插入
+www.test.com/sw.js js://{js-test}
 
-      ## css，往css响应追加样式，如果响应是html文档，则自动用`<style></style>`包装后插入
-      ## `/`可以起到仅对首页追加的效果
-      www.test.com/ css://{css-test}
+## css，往css响应追加样式，如果响应是html文档，则自动用`<style></style>`包装后插入
+## `/`可以起到仅对首页追加的效果
+www.test.com/ css://{css-test}
 
-      ## resReplace，替换响应的某些字符串
-      ## 一般可用来快速验证某些功能
-      www.test.com resReplace://{res-replace}
+## resReplace，替换响应的某些字符串
+## 一般可用来快速验证某些功能
+www.test.com resReplace://{res-replace}
+```
 
 - debug
 
-      www.test.com weinre://debug
-      www.test.com log://{log-test}
+```
+www.test.com weinre://debug
+www.test.com log://{log-test}
+```
 
 ## 插件开发
 
@@ -305,6 +309,6 @@ whistle 的插件是一个独立运行的进程，并通过暴露一些 http ser
 
 下载根证书，开启捕获 HTTPS 请求
 
-
 ## 参考
+
 [whistle](http://wproxy.org/whistle/)
