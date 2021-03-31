@@ -149,6 +149,19 @@ Styles 面板提供了伪类的调试能力
 - ``console.time()`` 和 ``console.timeEnd()`` 跟踪代码执行点之间经过的时间。
 - ``getEventListeners(document)`` 获取对象的所有事件
 
+### Copy
+
+当你想到控制台复制数据时可以使用
+
+![](./images/chrome_devtools_7.gif)
+
+### keys/values
+
+这个是 Devtools 提供的快速查看一个对象的 keys,values 的 API。
+
+![](./images/chrome_devtools_8.png)
+
+比直接用``Object.keys``, ``Object.values`` 方便些
 ### 远程调试安卓设备
 
 连接设备后，打开 chrome://inspect/#devices
