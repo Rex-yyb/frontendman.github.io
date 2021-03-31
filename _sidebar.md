@@ -15,7 +15,7 @@
   * [chrome 插件](/tools/chrome.md)
   * Debug工具 
     * [概述](/tools/debug/debug.md)
-    * [xcz](/tools/xcz/生产力工具-2/index.md)
+    * [远程调试工具](/tools/xcz/调试/index.md)
 * 运维
   * [常用指令](/devops/shell.md)
   * [部署笔记](/devops/deploy.md)
