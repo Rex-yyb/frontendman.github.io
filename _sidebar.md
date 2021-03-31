@@ -18,6 +18,7 @@
   * Debug工具 
     * [概述](/tools/debug/debug.md)
     * [远程调试工具](/tools/xcz/调试/index.md)
+    * [Chrome Devtools](/tools/debug/chrome_devtool.md)
 * 运维
   * [常用指令](/devops/shell.md)
   * [部署笔记](/devops/deploy.md)
