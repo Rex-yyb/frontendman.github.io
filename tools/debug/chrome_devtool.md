@@ -162,11 +162,13 @@ Styles 面板提供了伪类的调试能力
 ![](./images/chrome_devtools_8.png)
 
 比直接用``Object.keys``, ``Object.values`` 方便些
-### 远程调试安卓设备
+### 调试安卓设备
 
-连接设备后，打开 chrome://inspect/#devices
+usb 连接设备后，打开 chrome://inspect/#devices
 
 ![](./images/chrome_devtools_6.png)
+
+除了使用 usb 连接设备，你也可以使用 adb 远程连接设备后，在打开 chrome://inspect/#devices， 同样的你也可以看到上面的界面
 
 ## 参考资料
 
