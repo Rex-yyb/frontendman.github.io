@@ -187,6 +187,71 @@ console.log('End')
 
 ## this
 
+> this对象是在运行时基于函数的执行环境绑定的
+
+简单点来说就是“谁调用的这个函数，this就是谁”。
+
+来看几个例子：
+
+```js
+var x = 1
+function foo() {
+  console.log(this.x)
+}
+foo()  //  1
+```
+
+这个例子中``this``值向``window``，故输出的值为1
+
+```js
+var person = {
+  name: 'xiaoming',
+  showName () {
+    console.log(this.name)
+  } 
+}
+person.showName() // xiaoming
+```
+
+``this``值指向调用者，故``this === person``，``person.name`` 就是输出值
+
+通过``call``, ``apply``, ``bind`` 可以改变``this``值的指向
+
+```js
+var obj = {
+  name: 'xiaoming'
+}
+
+function foo() {
+ console.log(this.name)
+}
+
+foo.call(obj)   // xiaoming
+foo.apply(obj)  // xiaoming
+
+const bar = foo.bind(person)
+bar() // xiaoming
+```
+
+``call``和``apply``不同点是传参不一样，``call``的后续参数会传递给调用函数作为参数，而``apply``的第二个参数为一个数组，数组里的元素就是调用函数的参数。
+
+``bind``是会返回一个函数，这个函数中的``this``会被绑定成第一个参数，而且后面重新``bind``是没有效果的。
+
+最后讲箭头函数，箭头函数的``this``就是外层函数的``this``
+
+```js
+const name = 'outer'
+var person = {
+  name: 'xiaoming',
+  showName: () => {
+    console.log(this.name)
+  }
+}
+person.showName() // outer
+```
+
+可以看到箭头函数的``this``是指向外层函数``this``，这边就是 ``window``
+
 ## 原型
 
 ## 闭包
