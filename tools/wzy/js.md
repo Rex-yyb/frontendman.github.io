@@ -254,9 +254,170 @@ person.showName() // outer
 
 ## 原型
 
+JavaScript中原型这个概念很经常被提起，那么它到底是什么呢，它又有什么用呢?接下来让我们一步一步来理解它。
+
+## 认识原型
+### 原型的概念
+在JavaScript中，**原型也是一个对象**，通过原型可以实现对象的属性继承，JavaScript的对象中都包含了一个``[[Prototype]]``内部属性，这个属性所对应的就是该对象的原型。
+
+### 原型访问器
+``[[Prototype]]``作为对象的内部属性，是不能被直接访问的。不过我们可以通过下面这几种方式来获取到原型。
+
++ \_\_proto\_\_
++ Object.getPrototypeOf
++ obj.constructor.prototype
+
+那么可能会有人疑惑，平时我们可以通过函数的``prototype``属性来获取对象原型，这个又是怎么回事？好吧，让我们看个例子。
+
+```js
+function Foo () {}
+const f1 = new Foo()
+const f2 = new Foo()
+```
+
+![](./images/prototype_1.png)
+
+从上面的图我们可以看出``f1``和``f2``对象的``__proto__``属性是指向原型对象的``Foo.prototype``。
+
+同时这边也回答了为什么函数的``prototype``可以获取到对象原型，这是因为函数中有``prototype``这个属性，它是指向原型对象的。
+
+原型对象中也有``constructor``属性指向``Foo``这个构造函数。所以可以用第三种方式来获取到对象原型，不过这个方法不可靠，因为属性可以变嘛。
+
+总结下：
+> 每个构造函数都有一个原型对象(prototype)，原型对象都包含一个指向构造函数的指针(constructor)，而实例都包含一个指向原型对象的内部指针(proto)。
+
+这边抛出两个问题：
+1. 上面说到原型也是一个对象，那么它肯定也有原型的，它的原型又是指向什么呢？
+2. ``Foo``函数也是一个对象，它的原型指向哪里呢？
+
+要想回答这两个问题？这边要引入一个概念**原型链**
+
+## 原型链
+
+### 原型链概念
+> 原型链作为实现继承的主要方法，其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。
+
+### 实例分析
+还是``Foo``函数来举例子吧。
+```js
+Function Foo () {}
+const f1 = new Foo()
+const f2 = new Foo()
+const o1 = {}
+const o2 = {}
+```
+
+先来看下上面的第一个问题：
+![](./images/prototype_2.png)
+
+从这个原型链图中可以看出``Foo.prototype``这个对象的原型是``Object.prototype``。这个也应验了所有对象都继承自``Object.prototype``。
+
+这边还可以看到``Object.prototype``原型是指向``null``的。
+
+接下来来看下第二个问题：
+
+![](./images/prototype_3.png)
+
+从上图可以看到``Foo``函数的原型是指向``Function.prototype``的。
+
+不知道你们有没注意到，``Function``的原型也是指向``Function.prototype``的，还有``Function.prototype``指向``Object.prototype``
+
+同时这边可以看到``Objcet``也是由函数创建的，函数的原型链上又有``Object.prototype``，这边好像有问题，``Objcet``没被创建之前，函数原型链上为什么会有``Object.prototype``？
+
+这边有一种的解释是：
+> 先有 Object.prototype（原型链顶端），Function.prototype 继承 Object.prototype 而产生，最后，Function 和 Object 和其它构造函数继承 Function.prototype 而产生。
+
+顺便提下函数其实也有一个``constructor``属性，它是指向``Function``的。
+
+```js
+Foo.constructor === Function  // true
+Array.constructor === Function // true
+Function.constructor === Function // true
+Object.constructor === Function // true
+```
+
+讲到这里也差不多了，出一些题给大家看看。
+```js
+function Foo () {}
+
+typeof (Object) // function
+typeof (Array) // function
+
+Foo.constructor === Function // true
+Function.constructor === Function // true
+
+Object.prototype.constructor === Object // true
+({}).__proto__ === Object.prototype // true
+
+Object.__proto__ === Function.prototype // true
+Function.__proto__ === Function.prototype // true
+
+Object instanceof Function // true
+Function instanceof Object // true
+
+typeof Object.prototype // object
+typeof Function.prototype // function
+```
+
 ## 闭包
+
+> 闭包(closure)是一个函数在创建时允许自身函数访问并操作该自身函数之外的变量时所创建的作用域
+
+闭包产生的原因是 JavaScript 是词法作用域，函数可以沿着作用域链去查找变量。
+
+通过一个例子来理解上面的定义
+
+```js
+var add = (function () {
+  var counter = 0
+  return function () {
+    return counter += 1
+  }
+})()
+```
+
+``add``函数是指向函数执行后返回的那个函数，这时``add``函数中并没有``counter``变量，但是它却能正常访问到``counter``，故这里产生了一个闭包。
+
+闭包可以用于创建私有变量，如上述例子中``counter``就是私有变量，外部无法访问到。闭包也可以用于解决没有之前没有块级作用域的问题。
+
+```js
+for (var i = 1; i <= 5; i++) {
+  setTimeout(function timer() {
+    console.log(i)
+  }, 1000)
+}
+
+for (var i = 1; i <= 5; i++) {
+  (function(i){
+    setTimeout(function () {
+      console.log(i)
+    }, 1000)
+  })(i)
+}
+```
+
+第一段代码会输出 5 个 5，第二段代码会正常输出 1-5
+
+第一段代码中为循环执行 5 次 1 秒后打印 ``i``，但是 1 秒后 ``i`` 已经为 5 了，故输出 5 个 5
+
+第二段代码利用立即执行函数产生闭包，每次执行打印读取的是函数参数中的 ``i``，函数参数为 1-5，故正常打印 1-5
+
+在 ES6 后提供了块级作用域，故上面例子也可以这么实现
+
+```js
+for (let i = 1; i <= 5; i++) {
+  setTimeout(function timer() {
+    console.log(i)
+  }, 1000)
+}
+```
 
 ## 常用函数
 
 - throttle 节流函数
 - debounce 去抖函数
+- 数组去重
+
+## 参考资料
++ [深入理解javascript原型和闭包（完结）](https://www.cnblogs.com/wangfupeng1988/p/3977924.html)
++ [从探究Function.__proto__===Function.prototype过程中的一些收获 ](https://github.com/jawil/blog/issues/13)
