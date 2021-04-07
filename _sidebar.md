@@ -22,7 +22,7 @@
     * [xcz](/tools/xcz/生产力工具-2/index.md)
     * [whistle](/tools/debug/whistle/index.md)
     * [Fiddler Everywhere](/tools/debug/fiddler_everywhere.md)
-* ECMS
+* ECMA
   * 基础和坑
     * [js_wzy](/tools/wzy/js.md)
 * 运维
