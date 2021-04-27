@@ -6,8 +6,12 @@
 
 **版本格式**
 
-* 正式发布(release)的包版本：总共包含三个数字`X.Y.Z`(`major.minor.patch`)
-* 预发布版(pre-release)的包版本：`X.Y.Z-[a-zA-Z0-9.]`，用于支持包的不同[生命周期](https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E7%89%88%E6%9C%AC%E9%80%B1%E6%9C%9F)
+* 正式发布(`release`)的包版本：总共包含三个数字`X.Y.Z`(`major.minor.patch`)
+* 预发布版(`pre-release`)的包版本：`X.Y.Z-[a-zA-Z0-9.]`，用于支持包的不同[生命周期](https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E7%89%88%E6%9C%AC%E9%80%B1%E6%9C%9F)
+  * `pre-aplha`：功能不完整的版本
+  * `alpha`：功能还未完善，还需要测试
+  * `beta`：功能完善，对外公开的测试版本，由第三方参与测试
+  * `Release Candidate(RC)`：功能完善，测试通过。`作为发布的候选版本，如没有问题可发布为正式版本
 
 **版本规范**
 
@@ -36,11 +40,70 @@
 * `没有指定任何符号`：接收一个特定的版本，如`0.13.0`
 
 ## package.json文件 
+package.json里面包含了项目相关配置信息，这些配置信息可用于不同使用场景。例如存储了依赖的包和版本、程序入口等
+
+先看一个例子：
+
+```json
+{
+  "name": "test-project",
+  "version": "1.0.0",
+  "description": "A test project",
+  "main": "src/main.js",
+  "private": true,
+  "scripts": {
+    "start": "npm run dev",
+  },
+  "keywords": [
+    "components"
+  ],
+  "homepage":"https://github.com/xxxx.index",
+  "dependencies": {
+    "vue": "^2.5.2"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^7.1.2"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+}
+```
+#### 属性说明
+
+* `name`：包名，npmjs上查看到的名称
+* `version`：版本号
+* `description`：包描述信息
+* `script`：一系列可通过`node run`或者`node`来运行的脚步
+* `private:true`：防止被发布到npm
+* `main`：包文件入口，第三方import时，默认就是指向这个文件
+* `files`：需要发布到npmjs上的文件
+* `peerDependencies`：用户手动安装依赖，不依赖在自己包内。
+* `dependencies`：release时需要打包进代码的依赖
+* `devdependencies`：开发时用到的包，在release中不需要用到，比如webpack、babel、单元测试、项目构建的依赖包
+* `engines`：当前包运行的Node.js版本范围
+* `broswerslist`：当前包支持的浏览器范围，数据来源caniuse
+* `module`://TODO
+
+npmjs和这些属性的对应关系，以React为例子
+//TODO
+
+#### node script 说明
 
 
-## 指令
+## package_lock.json
+
+## npm包管理
 
 
-# 参考资料
+
+## 参考资料
 
 * [semver](https://semver.org/)
+* [软件生命周期](https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E7%89%88%E6%9C%AC%E9%80%B1%E6%9C%9F)
